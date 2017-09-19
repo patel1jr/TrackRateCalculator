@@ -1,0 +1,127 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+
+	<title>Robert Bosch LLC</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="HandheldFriendly" content="true">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Import CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" >
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.easing.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.scrollto.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/slabtext.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+	//alert("in jquery");
+  $("#btnExport").click(function(e) {
+  	//alert("in fn");
+    e.preventDefault();
+
+    //getting data from our table
+    var data_type = 'data:application/vnd.ms-excel';
+    var table_div = document.getElementById('table_wrapper');
+    var table_html = table_div.outerHTML.replace(/ /g, '%20');
+  
+
+    var date = new Date();
+    alert(date.getMonth());
+    var a = document.createElement('a');
+
+    a.href = data_type + ', ' + table_html;
+    a.download = '{{company}}' + '_' + '{{site}}'  + '_' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear() + '.xls';
+    a.click();
+  });
+});</script>
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid black;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f1f1f1}
+tr:nth-child(odd){background-color: #c3c3c4}
+th {
+    background-color: #4CAF50 ;
+    color: white;
+}
+</style>
+</head>
+<!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
+<body class="home" style="background-color: #BBBEC0">
+	<div id="header" style="background-color: #313b6b">
+		<div class="container">
+
+			<div class="row">	
+					<i id="nav-button" class="icon-circle-arrow-down"></i>
+					
+
+					<h2 id="logo"><a href="index.html"><img src="{{ url_for('static', filename='car.png') }}" alt="Bosch" width="120" height="120"><span class="highlight"><font color = "Red"></font></span></a></h2>
+
+				<div id="top-nav" class="">
+					<ul id="fixed-nav">
+						<li class="current"><a href="#home" style="font-family: sans-serif; color: white;">
+						<li class="current"><a href="#home" style="font-family: sans-serif; color: white;">Home</a></li>
+						<li><a href="#services" style="font-family: sans-serif; color: white;">Help</a></li>
+						<li><a href="#aboutus" style="font-family: sans-serif; color: white;">About Us</a></li>
+						<li><a href="#contact" style="font-family: sans-serif; color: white;">Contact Us</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div><!-- End Header -->
+
+			<!-- Big Full screen Banner -->
+	<div class="hero bg-fixed bg-color" id="home">
+
+		<div class="slogan">
+			<div  class="vcenter container">
+
+				<div class="row">
+					<h1 style="font-family: Helvetica" id="site" value="{{site}}">Timing Details per track for  {{site}} and  {{company}}</h1>
+					<div class="span12" id ="table_wrapper">
+						
+						 <table style="font-family: Helvetica">
+						 <tr class ="header">
+						 	<th >Track Number</th>
+						 	<th>Time in Seconds</th>
+						 	<th>Cost in track</th>
+						 </tr>
+    					{% for total,rate in path_and_track_total %}
+ 
+    					<p><font color="Black" size="5"><tr><td>Track <b>{{loop.index}}</b></td><td><b>{{total}}</b></td><td><b>{{rate}}</b></td></tr></font></p>
+   						{% endfor %}
+   						</table>		
+					</div>
+					<button class="btn btn-success" id="btnExport" style="font-family: Helvetica; margin:20px"> Download as Excel File</button>
+				</div>
+
+				<div class="row"><p style="font-family: Helvetica"><b>Total time is: {{final_total}} seconds</b></p>
+   						</div>
+   				<div class="row"><p style="font-family: Helvetica"><b>Total amount is: {{final_amount}} dollars</b></p>
+   			 </div>
+			</div>
+		</div>
+	</div>
+	<!-- End Full screen banner  -->
+	<div id="footer">
+		&copy; 2017 Robert Bosch LLC. Designed with lots of love at Bosch.
+	</div>
+</body>
+</html>

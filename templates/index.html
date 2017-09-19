@@ -1,0 +1,273 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+
+	<title>Robert Bosch LLC</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="HandheldFriendly" content="true">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Import CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" >
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.easing.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.scrollto.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/slabtext.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+	<script type="text/javascript">
+	
+function getTrack(){
+	/*alert(document.getElementById("place").value);*/
+	if(document.getElementById("place").value == "flatrock"){
+		document.getElementById("loadImage").src = "{{ url_for('static', filename='flatrock.png') }}";
+	}
+	if(document.getElementById("place").value == "plymouth"){
+		document.getElementById("loadImage").src = "{{ url_for('static', filename='plymouth.png') }}";
+	}
+	if(document.getElementById("place").value == "baudette"){
+		document.getElementById("loadImage").src = "{{ url_for('static', filename='baudette.png') }}";
+	}
+
+}
+	</script>
+<style type="text/css">
+	html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.column1 {
+  float: left;
+  width: 25%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media (max-width: 400px) {
+  .column1 {
+    width: 100%;
+    display: block;
+    
+  }
+}
+
+.card1 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container1 {
+  padding: 0 16px;
+}
+
+.container1::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title1 {
+  color: grey;
+}
+
+.button1 {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button1:hover {
+  background-color: #555;
+}
+
+</style>
+</head>
+<!-- To change color change the class "color-1" to "color-2, color-3 ... color-6" -->
+<body class="home" style="background-color: #BBBEC0">
+	<div id="header" style="background-color: #313b6b">
+		<div class="container">
+
+			<div class="row">	
+					 
+					<i id="nav-button" class="icon-circle-arrow-down"></i>
+					<h2 id="logo"><a href="index.html"><img src="{{ url_for('static', filename='car.png') }}" alt="CarCompany" width="120" height="120"><span class="highlight"><font color = "Red"></font></span></a></h2>
+
+				<div id="top-nav" class="">
+					<ul id="fixed-nav">
+						<li class="current"><a href="#home" style="font-family: sans-serif; color: white;">Home</a></li>
+						<li><a href="#services" style="font-family: sans-serif; color: white;">Help</a></li>
+						<li><a href="#aboutus" style="font-family: sans-serif; color: white;">About Us</a></li>
+						<li><a href="#contact" style="font-family: sans-serif; color: white;">Contact Us</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div><!-- End Header -->
+	<!-- Big Full screen Banner -->
+	<div class="hero bg-fixed bg-color" id="home" style="max-height: 700px;">
+
+		<div class="slogan">
+			<div  class="vcenter container">
+			<div class="row" style="margin-top: 70px">
+				<h1 style="font-family: sans-serif;">Car Tracking Tool </h1>
+			</div>			
+			  <div class="row" style="margin-top: 20px">
+    			<div class="span6" >
+      				
+						
+					<form action = "http://localhost:5000/bosch" method = "POST" enctype = "multipart/form-data">
+					<div class="row">
+					<select name="comp_select" style="margin : 10px" onchange="getTrack()" class="getTrack" id= "place">
+		              <option style="font-family: Helvetica;">Select Track</option>
+		              <option value=t1 style="font-family: Helvetica;">Track 1</option>
+		              <option value=t2 style="font-family: Helvetica;">Track 2</option>
+		              <option value=t3 style="font-family: Helvetica;">Track 3</option>
+		                                                            
+		            </select>
+		            <select name="oem_select1" style="margin : 10px" onchange="getPrice1()" class="getPrice1" id= "place1">
+		              <option style="font-family: Helvetica;">Select OEM</option>
+		              <option value=c1 style="font-family: Helvetica;">Car Tester Company 1</option>
+		              <option value=c2 style="font-family: Helvetica;">Car Tester Company 2</option>
+		              <option value=c3 style="font-family: Helvetica;">Car Tester Company 3</option>
+
+		                                                            
+		            </select>
+		            
+		            </div>
+		            <div class="row">
+	                <p style="font-weight: bold;color: black; font-family: Helvetica; margin:50px;">Upload a CSV file <input type = "file" name = "file" class = "btn btn-primary" /></font></p>
+    	            <p><input type = "submit" value = "submit" class="btn btn-success" style="font-family: Helvetica;"  /></p>
+    	            </div>
+       				</form>
+    			</div>
+			    <div class="span6">
+			      <img src="" width="300" height="250" style="margin:0px 40px"  id="loadImage"/>
+			    </div>
+  			</div>
+
+		</div>
+	</div>
+	<!-- End Full screen banner  -->
+	<!-- Services Section -->
+	<!-- class section-alt is to give a different color please edit css/style.css to change the color -->
+	<div class="section section-alt" id="services">
+		<div class="container">
+			<div class="content">
+				<div class="row" >
+					<div class="title">
+						<h2 style="font-family: Helvetica;">How this tool works</h2>
+						<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
+						<p style="font-family: Helvetica;">This tool provides timing details and cost calculation for a car in a particular track.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="span4 i-block">
+						<!--i class="icon-mobile-phone"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 1</h3>
+						<p style="font-family: Helvetica;">Put a device with pen drive connected to it in a car for reading real-time data. </p>
+					</div>
+					<div class="span4 i-block">
+						<!--i class="icon-star"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 2</h3>
+						<p style="font-family: Helvetica;">As a car moves in different tracks, the device will collect car data and save it in pen drive.</p>
+					</div>
+					<div class="span4 i-block">
+						<!--i class="icon-thumbs-up-alt"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 3</h3>
+						<p style="font-family: Helvetica;">When a car signs-out, collect device and pen drive.</p>
+					</div>
+				</div>
+				<div class="hr hr-invisible"></div>
+				<div class="row">
+					<div class="span4 i-block">
+						<!--i class="icon-briefcase"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 4</h3>
+						<p style="font-family: Helvetica;">Open this tool and select a CSV file from pendrive to import data.</p>
+					</div>
+					<div class="span4 i-block">
+						<!--i class="icon-camera"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 5</h3>
+						<p style="font-family: Helvetica;">This tool will provide total time with cost calculation as per OEM and different tracks.</p>
+					</div>
+					<div class="span4 i-block">
+						<!--i class="icon-desktop"></i>-->
+						<h3 style="font-family: Helvetica;">Step - 6</h3>
+						<p style="font-family: Helvetica;">You can see the car path, total cost, timing details and a map on screen. </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Services Section -->
+	<!-- Features Section -->
+	<div class="section section-alt" id="features">
+		<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="span12">
+						<div class="title">
+							<h2>EXTRA SPACE FOR FUTURE</h2>
+							
+							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
+							<p> </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+</div>
+</div>
+						</p>
+						
+					</div>
+				</div>
+			</div>
+		</div> 
+
+	</div>
+	<!-- End About US -->
+	
+	<!-- Contact Section -->
+	<div class="section" id="contact" >
+		<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="span12">
+						<div class="title">
+							<h2>Contact Us</h2>
+							<div class="hr hr-small hr-center"><span class="hr-inner"></span></div>
+							<p>We bring a personal and effective approach to every project we work on.</p>
+
+						</div>
+					</div>
+					<div class="span8">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11786.778361830115!2d-83.44694049678378!3d42.39165217908258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824ad6dfa5523bd%3A0x117a02effd268e22!2sRobert+Bosch+Plymouth+Township+Technical+Center!5e0!3m2!1sen!2sus!4v1503721180743" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					</div>					
+				</div>
+			</div>
+		</div> 
+
+	</div>
+	<!-- End Contact Section -->
+	<div id="footer">
+		&copy; 2017 Robert Bosch LLC. Designed with lots of love at Bosch.
+	</div>
+</body>
+</html>
