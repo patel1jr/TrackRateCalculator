@@ -13,7 +13,7 @@ $(document).ready(function(){
 	var win_h = $(window).height();
 	function setHeight(){
 		$('.home > .hero').css({height:win_h});
-		$(".vcenter").vAlign();
+		
 	}
 
 	setHeight();
